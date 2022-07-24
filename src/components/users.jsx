@@ -8,7 +8,7 @@ const renderUsers = ()=>{
     return(
         usersArr && usersArr.map((item, index)=>     <tr key={item._id}>
         <th className="row">{item.name}</th>
-        <th> {item.qualities && item.qualities.map(i => <p key={i._id} className={`bg-${i.color}`}>{i.name}</p>)}</th>
+        <th> {item.qualities && item.qualities.map(i => <span key={i._id} className={`bg-${i.color} text-white  mr-r p-2 badge`}>{i.name}</span>)}</th>
         <td>{item.profession.name}</td>
         <td>{item.completedMeetings}</td>
         <td>{item.rate}</td>
