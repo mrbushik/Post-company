@@ -1,9 +1,12 @@
 import React from 'react'
 import api from '../API'
 function Users() {
-    const usersArr = api.users.fetchAll()
-    console.log(usersArr);
-    usersArr.map(i => console.log(i.qualities.map(i=> i.name)))
+    // const usersArr = api.users.fetchAll()
+    // console.log(usersArr);
+    const [usersArr, setUsersArr] = React.useState(api.users.fetchAll())
+    const deleteUser = (id) =>{
+        setUsersArr(usersArr.filter(item => item !== id))
+    }
 const renderUsers = ()=>{
     return(
         usersArr && usersArr.map((item, index)=>     <tr key={item._id}>
@@ -12,6 +15,7 @@ const renderUsers = ()=>{
         <td>{item.profession.name}</td>
         <td>{item.completedMeetings}</td>
         <td>{item.rate}</td>
+        <td onClick={() =>deleteUser(item)}>удалить</td>
       </tr>)
     
     )
