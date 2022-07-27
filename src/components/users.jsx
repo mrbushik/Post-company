@@ -25,27 +25,27 @@ function Users() {
         
         )
     }
-      return (
-        <>
-        {usersCount === 0 
-        ? <span className='bg-danger p-2 m-2'>С тобой никто не тусанет</span>
-        : <span className='bg-primary p-2 m-2'>{usersArr.length} {correctWordForm()} тусанет с тобой сегодня</span>}
-         <table className="table">
-      <thead>
-        <tr>
-          <th className="col m-2">Имя</th>
-          <th className="col m-2">Качества</th>
-          <th className="col m-2">Проффесия</th>
-          <th className="col m-2">Встретился раз</th>
-          <th className="col m-2">Оценка</th>
-        </tr>
-      </thead>
-      <tbody>
-       {renderUsers()}
-      </tbody>
-    </table>
-        </>
-      )
-    }
+  return (
+<>
+  {usersCount === 0
+  ? <span className='bg-danger p-2 m-2'>С тобой никто не тусанет</span>
+  : <span className='bg-primary p-2 m-2'>{usersArr.length} {correctWordForm()} тусанет с тобой сегодня</span>}
+  <table className="table">
+    <thead>
+      <tr>
+        <th className="col m-2">Имя</th>
+        <th className="col m-2">Качества</th>
+        <th className="col m-2">Проффесия</th>
+        <th className="col m-2">Встретился раз</th>
+        <th className="col m-2">Оценка</th>
+      </tr>
+    </thead>
+    <tbody>
+      {renderUsers()}
+    </tbody>
+  </table>
+</>
+)
+}
 
-    export default Users
+export default Users
