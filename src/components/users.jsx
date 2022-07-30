@@ -4,8 +4,11 @@ import User from './user'
 function Users() {
     const [usersArr, setUsersArr] = React.useState(api.users.fetchAll())
     const usersCount = usersArr.length
-    const deleteUser = (id) => {
-        setUsersArr(usersArr.filter(item => item !== id))
+    const deleteUser = (obj) => {
+      // console.log( obj);
+
+        setUsersArr(usersArr.filter(item => item !== obj))
+        // console.log(usersArr.filter(item => item  !== id));
     } 
     const correctWordForm = () => {
          const titles = ['человек', 'человека', 'человек']
@@ -16,19 +19,10 @@ function Users() {
     }
     const renderUsers = () => {
         return(
-            usersArr && usersArr.map((item, index)=>     <User key={item._id} item={item}/>
-           
+            usersArr && usersArr.map((item, index)=>     <User key={item._id} item={item} index={index} onDelete={deleteUser}/>
           )
-        
         )
     }
-     {/* <th className="row mb-15">{item.name}</th>
-            <th> {item.qualities && item.qualities.map(i => <span key={i._id} className={`bg-${i.color} text-white  mr-r p-2 badge`}>{i.name}</span>)}</th>
-            <td>{item.profession.name}</td>
-            <td>{item.completedMeetings}</td>
-            <td>{item.rate}</td>
-            <button className="btn bg-danger  m-1" onClick={() =>deleteUser(item)}>удалить</button>
-          </User> */}
   return (
 <>
   {usersCount === 0
