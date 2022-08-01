@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Users from './components/users';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import App from './App'
 
 
 import reportWebVitals from './reportWebVitals';
@@ -10,7 +11,8 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Users />
+    {/* <Users /> */}
+    <App/>
   </React.StrictMode>
 );
 
