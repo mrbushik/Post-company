@@ -22,6 +22,7 @@ function User({ _id,
             <td>{rate}</td>
             <td>
           <button className="btn bg-danger  m-1" onClick={() => onDelete(_id)}>удалить</button>
+
             </td>
           </tr>
 

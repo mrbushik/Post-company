@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
 
-function Bookmark(name) {
-  return (
-    <span className={`bg-${name.color} text-white  mr-r p-2 badge`}>{name.name}</span>
-  )
-}
+const BookMark = ({ status, ...rest }) => {
+    return (
+        // <button {...rest}>
+        //     {/* <i className={"bi bi-bookmark" + (status ? "-heart-fill" : "")}></i> */}
+        //     <i class="bi bi-bookmark-fill"></i>
+        // </button>
+        // <i class="bi bi-bookmark-fill"></i>
+        <>
+        dddd
+        </>
+    );
+};
 
-export default Bookmark
+export default BookMark;
