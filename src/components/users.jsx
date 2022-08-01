@@ -1,5 +1,4 @@
 import React from 'react'
-import api from '../API'
 import User from './user'
 function Users({ users, ...rest }) {
  

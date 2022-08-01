@@ -1,24 +1,18 @@
 import React from "react";
 
-const SearchStatus = ({ length }) => {
-    const renderPhrase = (number) => {
-        const lastOne = Number(number.toString().slice(-1));
-        if (number > 4 && number < 15) {
-            return "человек тусанет";
-        }
-        if (lastOne === 1) return "человек тусанет";
-        if ([2, 3, 4].indexOf(lastOne) >= 0) return "человека тусанут";
-        return "человек тусанет";
-    };
+const SearchStatus = ({ count }) => {
+    const correctWordForm = () => {
+        const titles = ['человек', 'человека', 'человек']
+       const cases = [2, 0, 1, 1, 1, 2];   
+       return titles[ (count % 100 >4 && count%100<20) 
+         ? 2
+         : cases[(count % 10 < 5) ? count % 10 : 5] ];   
+   }
     return (
         <h2>
-            <span
-                className={"badge " + (length > 0 ? "bg-primary" : "bg-danger")}
-            >
-                {length > 0
-                    ? `${length + " " + renderPhrase(length)}   с тобой сегодня`
-                    : "Никто с тобой не тусанет"}
-            </span>
+           {count
+  ? <span className='bg-primary p-2 m-2'>{count} {correctWordForm()} тусанет с тобой сегодня</span>
+  : <span className='bg-danger p-2 m-2'>С тобой никто не тусанет</span>}
         </h2>
     );
 };
