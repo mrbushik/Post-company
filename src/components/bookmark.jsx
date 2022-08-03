@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Bookmark(name) {
+function Bookmark({status, ...rest}) {
   return (
-    <span className={`bg-${name.color} text-white  mr-r m-2 p-2 badge`}>{name.name}</span>
+    <button {...rest}>
+    <i className={"bi bi-bookmark" + (status ? "-heart-fill" : "")}></i>
+</button>
   )
 }
 
