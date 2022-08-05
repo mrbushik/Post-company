@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SearchStatus = ({ count }) => {
     const correctWordForm = () => {
@@ -24,5 +25,8 @@ const SearchStatus = ({ count }) => {
         </h2>
     );
 };
+SearchStatus.propTypes = {
+    count: PropTypes.number.isRequired,
+}
 
 export default SearchStatus;

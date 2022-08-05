@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Qualities(name) {
     return (
@@ -8,4 +9,7 @@ function Qualities(name) {
     );
 }
 
+Qualities.propTypes = {
+    name: PropTypes.string.isRequired,
+}
 export default Qualities;
