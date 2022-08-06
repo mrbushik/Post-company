@@ -2,7 +2,6 @@ import React from "react";
 import Bookmark from "./bookmark";
 import Qualities from "./qualitie";
 import PropTypes from "prop-types";
-import Users from "./users";
 
 function User({
     _id,
