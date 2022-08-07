@@ -6,26 +6,37 @@ import PropTypes from "prop-types";
 import GroupList from "./groupList";
 import api from "../app/api"
 
-function Users({ users, ...rest }) {
+function Users({ users: allUsers, ...rest }) {
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [profession, setProfession] = React.useState(api.professions.fetchAll())
-    
-    const count = users.length;
+    const [professions, setProfessions] = React.useState()
+    const [selectProf, setSelectProf] = React.useState()
+    const count = allUsers.length;
     const pageSize = 4;
    
-    const handleProfessionSelect = (params) => {
+    React.useEffect(() => {
+api.professions.fetchAll()
+.then((data)=> setProfessions(data))
+    },[])
 
+    const handleProfessionSelect = (item) => {
+        setSelectProf(item.name)
     }
    
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
-    console.log(api.professions.fetchAll());
-
-    const userCrop = paginate(users, currentPage, pageSize);
+    const filtredUsers = selectProf ? allUsers.filter((user)=>user.profession.name === selectProf) : allUsers
+    const fi = allUsers.filter((user)=>user.profession.name)
+    console.log(selectProf);
+    const userCrop = paginate(filtredUsers, currentPage, pageSize);
     return (
         <>
-        <GroupList items={profession} onItemSelect={handleProfessionSelect}/>
+        {professions && 
+        <GroupList
+        selectedItem={selectProf} 
+        items={professions} 
+        onItemSelect={handleProfessionSelect}/>}
+        
             <table className="table">
                 <thead>
                     <tr>
@@ -53,7 +64,7 @@ function Users({ users, ...rest }) {
 }
 
 Users.propTypes = {
-    // users: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired,
     // rest: PropTypes.array.isRequired,
 }
 
