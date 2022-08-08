@@ -17,7 +17,7 @@ function User({
     return (
         <>
             <tr key={_id}>
-                <th className="row mb-15">{name}</th>
+                <th className=" pd-bt30">{name}</th>
                 <th>
                     {" "}
                     {qualities &&
