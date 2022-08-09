@@ -1,21 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import User from "./user";
-function UsersTable({ users, ...rest }) {
+import TableHeader from "./tableHeader";
+import Qualities from "./qualitie";
+function UsersTable({ users, onSort, selectedSort, ...rest }) {
+    const columns = {
+        name: { iter: "name", name: "Имя" },
+        qualities: { name: "Качества" },
+        profession: { iter: "profession.name", name: "Профессия" },
+        completedMeetings: {
+            iter: "completedMeetings",
+            name: "Встретился, раз"
+        },
+        rate: { iter: "rate", name: "Оценка" },
+        bookmark: { iter: "bookmark", name: "Избранное" },
+        delete: {}
+    };
     return (
         <>
             <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Качества</th>
-                        <th scope="col">Профессия</th>
-                        <th scope="col">Встретился, раз</th>
-                        <th scope="col">Оценка</th>
-                        <th scope="col">Избранное</th>
-                        <th />
-                    </tr>
-                </thead>
+                <TableHeader {...{ onSort, selectedSort, columns }} />
                 <tbody>
                     {users.map((user) => (
                         <User {...rest} {...user} key={user._id} />
@@ -26,7 +30,9 @@ function UsersTable({ users, ...rest }) {
     );
 }
 UsersTable.propTypes = {
-    users: PropTypes.array.isRequired
+    users: PropTypes.array.isRequired,
+    currentSort: PropTypes.object.isRequired,
+    handleSort: PropTypes.func.isRequired
 };
 
 export default UsersTable;

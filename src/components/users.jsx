@@ -6,11 +6,13 @@ import GroupList from "./groupList";
 import api from "../app/api";
 import SearchStatus from "./searchStatus";
 import UsersTable from "./usersTable";
+import _ from "lodash";
 function Users({ users: allUsers, ...rest }) {
     const [currentPage, setCurrentPage] = React.useState(1);
     const [professions, setProfessions] = React.useState();
     const [selectedProf, setSelectedProf] = React.useState();
-    const pageSize = 4;
+    const [sortBy, setSortBy] = React.useState({ iter: "name", order: "asc" });
+    const pageSize = 5;
 
     React.useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data));
@@ -26,6 +28,9 @@ function Users({ users: allUsers, ...rest }) {
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
+    const handleSort = (item) => {
+        setSortBy(item);
+    };
     const filteredUsers = selectedProf
         ? allUsers.filter(
               (user) =>
@@ -34,8 +39,8 @@ function Users({ users: allUsers, ...rest }) {
           )
         : allUsers;
     const count = filteredUsers.length;
-    const usersCrop = paginate(filteredUsers, currentPage, pageSize);
-
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    const usersCrop = paginate(sortedUsers, currentPage, pageSize);
     const clearFilter = () => {
         setSelectedProf();
     };
@@ -58,7 +63,14 @@ function Users({ users: allUsers, ...rest }) {
             )}
             <div className="d-flex flex-column">
                 <SearchStatus count={count} />
-                {count > 0 && <UsersTable users={usersCrop} {...rest} />}
+                {count > 0 && (
+                    <UsersTable
+                        users={usersCrop}
+                        onSort={handleSort}
+                        selectedSort={sortBy}
+                        {...rest}
+                    />
+                )}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
