@@ -10,6 +10,6 @@ function Qualities(name) {
 }
 
 Qualities.propTypes = {
-    name: PropTypes.string.isRequired,
-}
+    name: PropTypes.string.isRequired
+};
 export default Qualities;
