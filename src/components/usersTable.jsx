@@ -4,7 +4,15 @@ import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import Qualities from "./qualitie";
 import TableBody from "./tableBody";
-function UsersTable({ users, onSort, selectedSort, ...rest }) {
+import Bookmark from "./bookmark";
+function UsersTable({
+    users,
+    onSort,
+    selectedSort,
+    onToggleBookMark,
+    onDelete,
+    ...rest
+}) {
     const columns = {
         name: { path: "name", name: "Имя" },
         qualities: { name: "Качества" },
@@ -14,8 +22,26 @@ function UsersTable({ users, onSort, selectedSort, ...rest }) {
             name: "Встретился, раз"
         },
         rate: { path: "rate", name: "Оценка" },
-        bookmark: { path: "bookmark", name: "Избранное" },
-        delete: {}
+        bookmark: {
+            path: "bookmark",
+            name: "Избранное",
+            component: (user) => (
+                <Bookmark
+                    status={user.bookmark}
+                    onClick={() => onToggleBookMark(user._id)}
+                />
+            )
+        },
+        delete: {
+            component: (user) => (
+                <button
+                    className="btn bg-danger  m-1"
+                    onClick={() => onDelete(user._id)}
+                >
+                    удалить
+                </button>
+            )
+        }
     };
     return (
         <>
@@ -34,7 +60,9 @@ function UsersTable({ users, onSort, selectedSort, ...rest }) {
 UsersTable.propTypes = {
     users: PropTypes.array.isRequired,
     currentSort: PropTypes.object.isRequired,
-    handleSort: PropTypes.func.isRequired
+    handleSort: PropTypes.func.isRequired,
+    onToggleBookMark: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
 
 export default UsersTable;
