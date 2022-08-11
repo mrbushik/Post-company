@@ -5,6 +5,8 @@ import TableHeader from "./tableHeader";
 import Qualities from "./qualitie";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
+import QualitiesList from "./qualitiesList";
+import Table from "./table";
 function UsersTable({
     users,
     onSort,
@@ -15,7 +17,10 @@ function UsersTable({
 }) {
     const columns = {
         name: { path: "name", name: "Имя" },
-        qualities: { name: "Качества" },
+        qualities: {
+            name: "Качества",
+            component: (user) => <QualitiesList qualities={user.qualities} />
+        },
         profession: { path: "profession.name", name: "Профессия" },
         completedMeetings: {
             path: "completedMeetings",
@@ -46,13 +51,14 @@ function UsersTable({
     return (
         <>
             <table className="table">
-                <TableHeader {...{ onSort, selectedSort, columns }} />
-                <TableBody {...{ columns, data: users }} />
-                {/* <tbody>
-                    {users.map((user) => (
-                        <User {...rest} {...user} key={user._id} />
-                    ))}
-                </tbody> */}
+                <Table
+                    onSort={onSort}
+                    selectedSort={selectedSort}
+                    columns={columns}
+                    data={users}
+                />
+                {/* <TableHeader {...{ onSort, selectedSort, columns }} />
+                <TableBody {...{ columns, data: users }} /> */}
             </table>
         </>
     );
