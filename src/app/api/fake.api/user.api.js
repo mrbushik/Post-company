@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { professionsObject as professions } from "./professions.api";
 const qualities = {
     tedious: {
@@ -147,9 +148,16 @@ const fetchAll = () =>
     new Promise((resolve) => {
         window.setTimeout(function () {
             resolve(users);
-        }, 2000);
+        }, 1000);
+    });
+const getById = (id) =>
+    new Promise((resolve) => {
+        window.setTimeout(function () {
+            resolve(users.find((user) => user._id === id));
+        }, 1000);
     });
 
 export default {
-    fetchAll
+    fetchAll,
+    getById
 };
