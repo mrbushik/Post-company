@@ -1,25 +1,34 @@
 import React from "react";
+import TextFided from "../components/textFided";
 
 function Login() {
-    const [email, setEmail] = React.useState("");
-    const handleCange = (e) => {
-        setEmail(e.target.value);
+    const [data, setData] = React.useState({ email: "", password: "" });
+    const handleChange = ({ target }) => {
+        setData((pervState) => ({
+            ...pervState,
+            [target.name]: target.value
+        }));
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e);
     };
     return (
-        <form action="">
-            <div>
-                <label htmlFor="email">email</label>
-                <input
-                    type="text"
-                    id="email"
-                    value={email}
-                    onChange={(e) => handleCange(e)}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">password</label>
-                <input type="password" id="password" />
-            </div>
+        <form onSubmit={handleSubmit}>
+            <TextFided
+                label="Электронная почта"
+                value={data.email}
+                name="email"
+                onChange={handleChange}
+            />
+            <TextFided
+                label="пароль"
+                type="password"
+                name="email"
+                value={data.password}
+                onChange={handleChange}
+            />
+            <button type="submit">submit</button>
         </form>
     );
 }
