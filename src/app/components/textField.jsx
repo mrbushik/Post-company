@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-function TextFided({ label, type, name, value, onChange }) {
+function textField({ label, type, name, value, onChange, error }) {
     return (
         <div>
             <label htmlFor={name}>{label}</label>
@@ -11,17 +11,19 @@ function TextFided({ label, type, name, value, onChange }) {
                 value={value}
                 onChange={(e) => onChange(e)}
             />
+            {error && <p>{error}</p>}
         </div>
     );
 }
-TextFided.defaultProps = {
+textField.defaultProps = {
     type: "text"
 };
-TextFided.propTypes = {
+textField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    error: PropTypes.string
 };
 
-export default TextFided;
+export default textField;
