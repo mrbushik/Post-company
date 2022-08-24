@@ -75,23 +75,6 @@ const UsersList = () => {
               )
             : users;
 
-        // {
-        //     if (users) {
-        //         const filteredUsers = searchQuery
-        //             ? users.filter(
-        //                   (user) =>
-        //                       user.name
-        //                           .toLowerCase()
-        //                           .indexOf(searchQuery.toLowerCase()) !== -1
-        //               )
-        //             : selectedProf
-        //             ? users.filter(
-        //                   (user) =>
-        //                       JSON.stringify(user.profession) ===
-        //                       JSON.stringify(selectedProf)
-        //               )
-        //             : users;
-        // }
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
             filteredUsers,
