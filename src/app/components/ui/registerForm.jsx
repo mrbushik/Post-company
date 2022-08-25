@@ -1,7 +1,8 @@
 import React from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
-function LoginForm() {
+
+function RegisterForm() {
     const [data, setData] = React.useState({ email: "", password: "" });
     const [errors, setErrors] = React.useState({});
     const handleChange = ({ target }) => {
@@ -79,4 +80,4 @@ function LoginForm() {
     );
 }
 
-export default LoginForm;
+export default RegisterForm;
