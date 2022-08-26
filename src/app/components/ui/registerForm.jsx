@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
@@ -5,6 +6,7 @@ import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
+import CheckBoxField from "../common/form/checkBoxField";
 function RegisterForm() {
     const [professions, setProfession] = React.useState();
     const [data, setData] = React.useState({
@@ -12,7 +14,8 @@ function RegisterForm() {
         password: "",
         profession: "",
         sex: "male",
-        qualities: []
+        qualities: [],
+        licence: false
     });
     const [qualities, setQualities] = React.useState({});
     React.useEffect(() => {
@@ -55,6 +58,12 @@ function RegisterForm() {
         profession: {
             isRequired: {
                 message: "Обязательно выберите свою професию"
+            }
+        },
+        licence: {
+            isRequired: {
+                message:
+                    "Вы не можете использовать наш сервис без лицензионного соглашения"
             }
         }
     };
@@ -117,6 +126,14 @@ function RegisterForm() {
                 label="Выберите ваши качества"
                 name="qualities"
             />
+            <CheckBoxField
+                value={data.licence}
+                onChange={handleChange}
+                name="licence"
+                error={errors.licence}
+            >
+                Подтвердить <a>лицензионное соглашение</a>
+            </CheckBoxField>
             <button
                 className="btn btn-primary w-100 mx-auto"
                 type="submit"

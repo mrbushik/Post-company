@@ -1,10 +1,16 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
+import CheckBoxField from "../common/form/checkBoxField";
 function LoginForm() {
-    const [data, setData] = React.useState({ email: "", password: "" });
+    const [data, setData] = React.useState({
+        email: "",
+        password: "",
+        stayOn: false
+    });
     const [errors, setErrors] = React.useState({});
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
@@ -69,6 +75,13 @@ function LoginForm() {
                 onChange={handleChange}
                 error={errors.password}
             />
+            <CheckBoxField
+                value={data.stayOn}
+                onChange={handleChange}
+                name="stayOn"
+            >
+                Оставаться в системе
+            </CheckBoxField>
             <button
                 className="btn btn-primary w-100 mx-auto"
                 type="submit"
