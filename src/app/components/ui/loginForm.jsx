@@ -37,6 +37,7 @@ function LoginForm() {
     };
     React.useEffect(() => {
         validate();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
     const validate = () => {
         const errors = validator(data, validatorConfig);

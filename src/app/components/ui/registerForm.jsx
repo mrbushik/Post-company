@@ -1,9 +1,20 @@
 import React from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
-
+import api from "../../api";
+import SelectField from "../common/form/selectField";
 function RegisterForm() {
-    const [data, setData] = React.useState({ email: "", password: "" });
+    const [professions, setProfession] = React.useState();
+    const [data, setData] = React.useState({
+        email: "",
+        password: "",
+        profession: ""
+    });
+
+    React.useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfession(data));
+    }, []);
+
     const [errors, setErrors] = React.useState({});
     const handleChange = ({ target }) => {
         setData((prevState) => ({
@@ -11,6 +22,7 @@ function RegisterForm() {
             [target.name]: target.value
         }));
     };
+
     const validatorConfig = {
         email: {
             isRequired: {
@@ -34,10 +46,16 @@ function RegisterForm() {
                 message: "Пароль должен состоять минимум из 8 символов",
                 value: 8
             }
+        },
+        profession: {
+            isRequired: {
+                message: "Обязательно выберите свою професию"
+            }
         }
     };
     React.useEffect(() => {
         validate();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
     const validate = () => {
         const errors = validator(data, validatorConfig);
@@ -68,6 +86,14 @@ function RegisterForm() {
                 value={data.password}
                 onChange={handleChange}
                 error={errors.password}
+            />
+            <SelectField
+                label="Выберите свою проффесию"
+                options={professions}
+                defaultOption="Choose.."
+                onChange={handleChange}
+                value={data.profession}
+                error={errors.profession}
             />
             <button
                 className="btn btn-primary w-100 mx-auto"
