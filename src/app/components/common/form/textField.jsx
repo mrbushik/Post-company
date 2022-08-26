@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function TextField({ label, type, name, value, onChange, error }) {
+    const handleChange = ({ target }) => {
+        onChange({ name: target.name, value: target.value });
+    };
     const [showPassword, setShowPassword] = useState(false);
     const getInputClasses = () => {
         return "form-control" + (error ? " is-invalid" : "");
@@ -18,7 +21,7 @@ function TextField({ label, type, name, value, onChange, error }) {
                     id={name}
                     name={name}
                     value={value}
-                    onChange={onChange}
+                    onChange={handleChange}
                     className={getInputClasses()}
                 />
                 {type === "password" && (
