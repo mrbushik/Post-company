@@ -108,6 +108,7 @@ function RegisterForm() {
                 onChange={handleChange}
                 value={data.profession}
                 error={errors.profession}
+                name="professions"
             />
             <RadioField
                 options={[

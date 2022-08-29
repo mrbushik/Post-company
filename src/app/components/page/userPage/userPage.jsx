@@ -8,7 +8,7 @@ function UserPage({ userId }) {
     const history = useHistory();
     React.useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
-    });
+    }, []);
     const handleClick = () => {
         history.push("/users");
     };
