@@ -12,7 +12,7 @@ function RegisterForm() {
     const [data, setData] = React.useState({
         email: "",
         password: "",
-        profession: "",
+        professions: "",
         sex: "male",
         qualities: [],
         licence: false
@@ -103,12 +103,12 @@ function RegisterForm() {
             />
             <SelectField
                 label="Выберите свою проффесию"
+                name="professions"
                 options={professions}
                 defaultOption="Choose.."
                 onChange={handleChange}
                 value={data.profession}
                 error={errors.profession}
-                name="professions"
             />
             <RadioField
                 options={[
@@ -126,6 +126,7 @@ function RegisterForm() {
                 onChange={handleChange}
                 label="Выберите ваши качества"
                 name="qualities"
+                defaultValue={data.qualities}
             />
             <CheckBoxField
                 value={data.licence}
